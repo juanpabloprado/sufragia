@@ -16,6 +16,24 @@ ActiveRecord::Schema.define(version: 20160620215803) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "campaigns", force: :cascade do |t|
+    t.string   "name"
+    t.string   "category"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  create_table "options", force: :cascade do |t|
+    t.integer  "campaign_id"
+    t.string   "option"
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "options", ["campaign_id"], name: "index_options_on_campaign_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email"
     t.string   "encrypted_password",       default: "", null: false
@@ -39,4 +57,17 @@ ActiveRecord::Schema.define(version: 20160620215803) do
   add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "option_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "votes", ["option_id"], name: "index_votes_on_option_id", using: :btree
+  add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
+
+  add_foreign_key "options", "campaigns"
+  add_foreign_key "votes", "options"
+  add_foreign_key "votes", "users"
 end
