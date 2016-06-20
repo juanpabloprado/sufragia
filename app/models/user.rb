@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone_number]
 
+  has_many :votes
+  has_many :campaings, through: :votes
+  
   def email_required?
     false
   end
@@ -16,4 +19,5 @@ class User < ActiveRecord::Base
 
     where(conditions.to_hash).where(["phone_number = :value", { :value => login }]).first
   end
+
 end
