@@ -1,0 +1,209 @@
+$base-color: #2B8DF5;
+
+* {
+	margin: 0px;
+	padding: 0px;
+	box-sizing: border-box;
+}
+
+a {
+	display: inline-block;
+	text-decoration: none;
+}
+
+body {
+	font-size: 14px;
+	font-family: 'Roboto', sans-serif;
+	background: #F6F8F8;
+	position: relative;
+	 -webkit-font-smoothing: antialiased;
+}
+
+.container {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&.vertical {
+		flex-flow: column;
+	}
+}
+
+.button-group {
+	display: flex;
+	flex-flow: row;
+	align-items: center;
+}
+
+.button {
+	transition: all 0.2s ease;
+
+	&.action {
+		background: #fff;
+		color: $base-color;
+		padding: 1rem 2rem;
+		font-weight: 600;
+		border-radius: 100rem;
+		font-size: 1.1rem;
+
+		&:hover {
+			box-shadow: 0 0.2rem 0.2rem rgba(0,0,0,0.2);
+		}
+	}
+
+	&.alpha {
+		background: transparent;
+		border: 0.2rem solid rgba(255,255,255,0.2);
+		padding: 1rem 2rem;
+		border-radius: 100rem;
+		color: #fff;
+
+		&:hover {
+			background: #fff;
+			color: $base-color;
+		}
+	}
+}
+
+.main-header {
+	width: 100%;
+	top: 0;
+	padding: 1rem;
+	position: absolute;
+
+	.logo {
+		transform: scale(0.5);
+		display: inline-block;
+	}
+
+	.main-nav {
+		display: inline-block;
+		flex: 2;
+		text-align: right;
+
+		a {
+			color: #fff;
+			font-weight: 600;
+
+			& + a {
+				margin-left: 1rem;
+			}
+		}
+	}
+}
+
+.intro {
+	height: 100vh;
+	background: $base-color;
+
+	&-subtitle {
+		text-transform: uppercase;
+		color: rgba(255,255,255,0.6);
+		letter-spacing: 0.2rem;
+	}
+
+	&-title {
+		color: #fff;
+		font-size: 2rem;
+		margin: 1rem 0;
+	}
+
+	#network {
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.big-search {
+	background: #fff;
+	padding: 1rem;
+	width: 100%;
+	position: relative;
+
+	i {
+		padding-right: 1rem;
+	}
+
+	input {
+		font-size: 1.6rem;
+		border: 0;
+		height: 100%;
+		outline: 0;
+		display: inline-block;
+	}
+}
+
+.polls {
+	padding: 2rem 0;
+}
+
+.poll-item {
+	background: #fff;
+	padding: 2rem 1rem 3.5rem 1rem;
+	border-radius: 0.4rem;
+	box-shadow: 0 0.4rem 0.4rem rgba(0,0,0,0.2);
+	display: inline-block;
+	width: 32%;
+	margin: 0.5%;
+	max-width: 400px;
+	position: relative;
+	overflow: hidden;
+	transition: all 0.3s ease;
+
+	&:hover {
+		box-shadow: 0 0.8rem 0.4rem rgba(0,0,0,0.2);
+	}
+
+	&-category {
+		text-transform: uppercase;
+		color: $base-color;
+		font-weight: 600;
+	}
+
+	&-title {
+		color: #000;
+		margin: 1rem 0;
+	}
+
+	&-tag {
+		background: rgba($base-color, 0.2);
+		color: darken($base-color, 10%);
+		font-weight: 600;
+		padding: 0.5rem;
+		border-radius: 100rem;
+
+		i {
+			font-size: 0.9rem;
+			vertical-align: middle;
+			opacity: 0.4;
+			padding-right: 0.2rem;
+		}
+	}
+
+	&-actions {
+		position: absolute;
+		bottom: 0;
+		right: 0;
+
+		.link {
+			color: $base-color;
+			font-weight: 600;
+			padding: 1rem 1rem;
+		}
+
+		.action {
+			background: $base-color;
+			color: #fff;
+			padding: 1rem 2rem;
+			font-weight: 600;
+		}
+	}
+
+}
