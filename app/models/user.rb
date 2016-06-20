@@ -8,7 +8,9 @@ class User < ActiveRecord::Base
 
   has_many :votes
   has_many :campaings, through: :votes
-  
+
+   enum role: [ :admin, :voter ]
+
   def email_required?
     false
   end
