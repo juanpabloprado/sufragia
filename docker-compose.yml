@@ -1,0 +1,38 @@
+version: "2"
+
+volumes:
+  gems:
+    driver: local
+  postgres-data:
+    driver: local
+
+services:
+  db:
+    image: postgres:9.5.1
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: "H4ch4Th0n!"
+  web:
+    image: ruby:2.2.5
+    command: rails server -b 0.0.0.0 -p 3000 -P /tmp/rails.pid
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - gems:/usr/local/bundle
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true
+    links:
+      - db
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_URL: "postgres://postgres:H4ch4Th0n!@db:5432/democrata_dev?pool=25&encoding=unicode&schema_search_path=public,partitioning"
+      RAILS_ENV: "development"
+      RACK_ENV: "development"
+
