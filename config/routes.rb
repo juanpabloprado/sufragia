@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :users, only: [] do
+    member do
+      post :send_phone_confirmation_token
+    end
+  end
+
   devise_for :users
 
   root 'pages#index'

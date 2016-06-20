@@ -8,13 +8,18 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_in) do |user_params|
+      user_params.permit(:password,
+                         :phone_number,
+                         :remember_me)
+    end
+
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
       user_params.permit(:name,
                          :password,
                          :password_confirmation,
                          :phone_number,
-                         :state,
-                         :phone_confirmation_token)
+                         :state)
     end
   end
 end
