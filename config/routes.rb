@@ -2,7 +2,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [] do
     member do
-      post :send_phone_confirmation_token
+      post :validate_confirmation_phone_number
+      get :confirm
     end
   end
 

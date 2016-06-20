@@ -1,0 +1,6 @@
+<%= form_for current_user, url: validate_confirmation_phone_number_user_path(current_user), method: :post do |f| %>
+  <%= f.label :phone_confirmation_token %><br>
+  <%= f.text_field :phone_confirmation_token, value: "" %>
+
+  <%= submit_tag "Send" %>
+<% end %>
