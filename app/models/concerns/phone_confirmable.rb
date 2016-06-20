@@ -12,11 +12,7 @@ module PhoneConfirmable
   end
 
   def has_correct_confirmation_code?(confirmation_code)
-    unless self.confirmation_code == confirmation_code
-      errors.add(:phone_confirmation_token, "el codigo de confirmacion no coincide.")
-      false
-    end
-    true
+    confirmation_code.present? && self.phone_confirmation_token == confirmation_code.to_i
   end
 
   def confirmed?
