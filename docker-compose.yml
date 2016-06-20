@@ -35,4 +35,6 @@ services:
       DATABASE_URL: "postgres://postgres:H4ch4Th0n!@db:5432/democrata_dev?pool=25&encoding=unicode&schema_search_path=public,partitioning"
       RAILS_ENV: "development"
       RACK_ENV: "development"
+      TEXT_MAGIC_USERNAME: "edolopez"
+      TEXT_MAGIC_PASSWORD: "fTfrCKBlSN"
 

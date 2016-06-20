@@ -12,7 +12,7 @@ module PhoneConfirmable
   end
 
   def has_correct_confirmation_code?(confirmation_code)
-    unless self.confirmation_code == confirmation_code
+    unless self.phone_confirmation_token == confirmation_code
       errors.add(:phone_confirmation_token, "el codigo de confirmacion no coincide.")
       false
     end
@@ -28,10 +28,12 @@ module PhoneConfirmable
   end
 
   def send_confirmation
-    # Actually send the SMS
-    #SMSApi.send_confirmation_code_to_user self.confirmation_code, self.phone_with_country_code
+    SMSApi.send_confirmation_code_to_user self.phone_confirmation_token, phone_with_country_code
   end
 
+  def phone_with_country_code
+    "52#{phone_number}"
+  end
 
 
   private
@@ -39,4 +41,5 @@ module PhoneConfirmable
   def generate_confirmation_code!
     self.phone_confirmation_token = rand.to_s[2..5]
   end
+
 end
