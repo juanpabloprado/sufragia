@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620215803) do
+ActiveRecord::Schema.define(version: 20160621030020) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,9 +20,13 @@ ActiveRecord::Schema.define(version: 20160620215803) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id"
+    t.jsonb    "segments",    default: {}
   end
+
+  add_index "campaigns", ["user_id"], name: "index_campaigns_on_user_id", using: :btree
 
   create_table "options", force: :cascade do |t|
     t.integer  "campaign_id"
@@ -52,6 +56,10 @@ ActiveRecord::Schema.define(version: 20160620215803) do
     t.string   "phone_number",                          null: false
     t.integer  "phone_confirmation_token"
     t.datetime "confirmed_at"
+    t.integer  "role"
+    t.jsonb    "properties",               default: {}
+    t.string   "zip_code"
+    t.string   "authentication_token"
   end
 
   add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
@@ -67,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160620215803) do
   add_index "votes", ["option_id"], name: "index_votes_on_option_id", using: :btree
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree
 
+  add_foreign_key "campaigns", "users"
   add_foreign_key "options", "campaigns"
   add_foreign_key "votes", "options"
   add_foreign_key "votes", "users"

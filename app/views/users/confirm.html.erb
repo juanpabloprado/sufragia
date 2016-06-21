@@ -1,6 +1,15 @@
-<%= form_for current_user, url: validate_confirmation_phone_number_user_path(current_user), method: :post do |f| %>
-  <%= f.label :phone_confirmation_token %><br>
-  <%= f.text_field :phone_confirmation_token, value: "" %>
-
-  <%= submit_tag "Send" %>
-<% end %>
+<div class="full-page center vertical">
+	<i class="material-icons">phonelink_lock</i>
+	<h2 class="page-hero-title">Confirmar Identidad</h2>
+	<p class="page-hero-desc">Crea una nueva votación y elige los ciudadanos a votar.</p>
+	<%= form_for current_user, url: validate_confirmation_phone_number_user_path(current_user), method: :post do |f| %>
+	  <p>Hemos enviado un mensaje de texto con tu código de confirmación, Por favor espera unos minutos e ingresa el código.</p>
+	  <div class="field center-field">
+	  	<%= f.text_field :phone_confirmation_token, value: "", placeholder: "Código de verificación" %>
+	  </div>
+	  <div class="actions center vertical">
+	  	<%= submit_tag "Confirmar", class: "button inverse action" %>
+	  	<a href="#">¿No has recibido tu código?</a>
+	  </div>
+	<% end %>
+</div>

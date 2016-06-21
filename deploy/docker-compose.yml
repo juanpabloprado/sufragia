@@ -1,0 +1,31 @@
+version: "2"
+
+volumes:
+  postgres-data:
+    driver: local
+
+services:
+  db:
+    image: postgres:9.5.1
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: "H4ch4Th0n!"
+  web:
+    image: kurenn/sufragia:0.0.1
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true
+    links:
+      - db
+    ports:
+      - 80:80
+    environment:
+      DATABASE_URL: "postgres://postgres:H4ch4Th0n!@db:5432/sufragia_prod?pool=25&encoding=unicode&schema_search_path=public,partitioning"
+      TEXT_MAGIC_USERNAME: "edolopez"
+      TEXT_MAGIC_PASSWORD: "fTfrCKBlSN"
+

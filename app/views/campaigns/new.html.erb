@@ -1,0 +1,50 @@
+<header class="page-hero">
+  <i class="material-icons">note_add</i>
+  <h2 class="page-hero-title">Nueva Votación</h2>
+  <p class="page-hero-desc">Crea una nueva votación y elige los ciudadanos a votar.</p>
+</header>
+<section class="page-content">
+  <div class="container">
+    <div class="card-form center">
+      <%= nested_form_for(@campaign) do |f| %>
+        <div class="field">
+          <%= f.label :title, "Titulo" %>
+          <p>¿Cuál es la pregunta que quieres lanzar a la población.</p>
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+
+        <div class="field">
+          <%= f.label :description, "Descripcion" %>
+          <p>Describe o agrega detalles a la votación, trata de ser lo mas claro posible acerca del tema a votar.</p>
+          <%= f.text_area :description %>
+        </div>
+
+        <h3>Options</h3>
+        <%= f.fields_for :options do |option_form| %>
+          <div class="option-item">
+            <div class="field">
+              <%=option_form.label :option %>
+              <%=option_form.text_field :option %>
+            </div>
+            <%= option_form.link_to_remove "Eliminar opcion" %>
+          </div>
+        <% end %>
+
+        <div class="options center vertical">
+          <%= f.link_to_add "Agregar Opción", :options %>
+        </div>
+
+        <br>
+        <div class="field">
+          <%= f.label :segments, "Segmentos" %>
+          <p>Describe o agrega detalles a la votación, trata de ser lo mas claro posible acerca del tema a votar.</p>
+          <%= select_tag "campaign[segments][zone]", options_for_select({  "Por codigo postal" => "zip_code", "Por Estado" => "state", "Todo Mexico" => "country" }), prompt: "Selecciona una opcion" %>
+        </div>
+
+        <div class="actions center">
+          <%= f.submit "Crear Votación", class: "button action inverse" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>

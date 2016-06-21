@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  tollify
   include PhoneConfirmable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,10 +7,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone_number]
 
-  has_many :votes
-  has_many :campaings, through: :votes
+  has_many :votes, dependent: :destroy
+  has_many :campaigns, through: :votes
 
-   enum role: [ :admin, :voter ]
+  enum role: [ :admin, :voter ]
 
   def email_required?
     false
@@ -20,6 +21,10 @@ class User < ActiveRecord::Base
     login = conditions.delete(:phone_number)
 
     where(conditions.to_hash).where(["phone_number = :value", { :value => login }]).first
+  end
+
+  def already_voted_on_campaign?(campaign)
+    campaign_ids.include?(campaign.id)
   end
 
 end

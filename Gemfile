@@ -25,6 +25,13 @@ gem 'pg'
 gem 'therubyracer'
 gem 'devise'
 gem 'textmagic'
+gem 'puma'
+gem 'versionist'
+gem 'active_model_serializers', github: "rails-api/active_model_serializers", branch: "0-8-stable"
+gem 'toll'
+
+
+gem "nested_form"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -48,3 +55,6 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem "rails_12factor"
+end

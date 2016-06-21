@@ -1,26 +1,20 @@
-<h2>Log in</h2>
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :phone_number %><br />
-    <%= f.phone_field :phone_number, autofocus: true %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
-
-  <% if devise_mapping.rememberable? -%>
+<section class="full-page center vertical">
+  <i class="material-icons">vpn_key</i>
+  <h2 class="full-page-title">Accerder a Sufrafia</h2>
+  <p class="full-page-desc">Accede a sufragia para comenzar a participar en las votaciones</p>
+  <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
+      <%= f.label :phone_number %><br />
+      <%= f.phone_field :phone_number, autofocus: true %>
     </div>
-  <% end -%>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off" %>
+    </div>
 
-<%= render "devise/shared/links" %>
+    <div class="actions center">
+      <%= f.submit "Acceder", class: "button action inverse" %>
+    </div>
+  <% end %>
+</section>
