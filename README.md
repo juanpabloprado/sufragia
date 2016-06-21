@@ -33,6 +33,10 @@ Ruby on Rails, Faye library for real-time interaction, TextMagic over Twilio for
   4. Native mobile apps both for Android and iOS. 
   5. Democracy adoption made easy with a deploy button. 
 
+## API documentation
+
+[https://sufragia.readme.io/v1.0?bypass=19f7688fc2](https://sufragia.readme.io/v1.0?bypass=19f7688fc2)
+
 ## Copyright and license
 Code and documentation copyright 2016 Sufragia. Code released under the MIT license.
 
