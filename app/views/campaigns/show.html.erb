@@ -41,14 +41,12 @@
       function drawChart() {
 
         var data = new google.visualization.DataTable();
-	      data.addColumn('string', 'Pizza');
-	      data.addColumn('number', 'Populartiy');
+	      data.addColumn('string', 'Option');
+	      data.addColumn('number', 'Votes');
 	      data.addRows([
-	        ['Pepperoni', 33],
-	        ['Hawaiian', 26],
-	        ['Mushroom', 22],
-	        ['Sausage', 10], // Below limit.
-	        ['Anchovies', 9] // Below limit.
+	      	 <% @campaign.options.each_with_index do |option, index| %>
+	      	 	  ['<%=option.option%>', <%=option.votes.count%>],
+	      	 <% end %>
 	      ]);
 
         var options = {
