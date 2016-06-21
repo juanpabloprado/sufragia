@@ -9,30 +9,20 @@
 		<%end%>
 	</div>
 	<div class="votes">
-		<span class="vote">Un ciudadano acaba de votar: <b>Monterrey</b> en <b>¿Qué presidente serías?</b></span>
+		<% if !@last_vote.nil? %>
+		<span class="vote">Un ciudadano acaba de votar: <b><%= @last_vote.option.option%></b> en <b><%= @last_vote.campaign.name%></b></span>
+		<% end %>
 	</div>
 </section>
 <section class="time-line center">
-	<div class="vote">
-		<h4>Peña Nieto</h4>
-		<h3>Elección presidente de México</h3>
-		<span>Hace 2 Minutos</span>
-	</div>
-	<div class="vote">
-		<h4>Peña Nieto</h4>
-		<h3>Elección presidente de México</h3>
-		<span>Hace 2 Minutos</span>
-	</div>
-	<div class="vote">
-		<h4>Peña Nieto</h4>
-		<h3>Elección presidente de México</h3>
-		<span>Hace 2 Minutos</span>
-	</div>
-	<div class="vote">
-		<h4>Peña Nieto</h4>
-		<h3>Elección presidente de México</h3>
-		<span>Hace 2 Minutos</span>
-	</div>
+	<% Vote.limit(4).order(:created_at).each do |vote| %>
+		<div class="vote">
+			<h4><%=vote.option.option%></h4>
+			<h3><%=vote.campaign.name%></h3>
+			<span>Hace <%=time_ago_in_words(vote.created_at)%></span>
+		</div>
+	<% end %>
+	
 </section>
 <section class="polls">
 	<div class="container">
