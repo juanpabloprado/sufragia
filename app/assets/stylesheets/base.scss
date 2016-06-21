@@ -483,7 +483,7 @@ body {
 	padding: 1rem;
 	display: inline-block;
 	min-width: 100px;
-	max-width: 25%;
+	max-width: 24%;
 	vertical-align: top;
 
 	.number {
@@ -539,6 +539,14 @@ body {
     &-header {
     	background: $base-color;
     	padding: 1rem;
+    }
+
+    .pagination {
+		font-size: 0.8rem;
+		color: rgba(255,255,255,0.4);
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 2px;
     }
 
 	.name {

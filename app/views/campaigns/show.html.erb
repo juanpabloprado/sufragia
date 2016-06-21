@@ -36,6 +36,7 @@
 			    <% @campaign.options.each_with_index do |option, index| %>
 			      <article class="option-vote" id="slide-<%= index %>">
 			      	<div class="option-vote-header">
+			      		<p class="pagination">Opcion <%= index+1 %> de <%= @campaign.options.count %></p>
 			      		<span class="bullet"><%= letter(index) %></span>
 			      		<h3 class="name"><%= option.option %></h3>
 			      	</div>
