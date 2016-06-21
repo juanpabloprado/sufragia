@@ -42,6 +42,11 @@ body {
 
 .button {
 	transition: all 0.2s ease;
+	outline: 0;
+
+	&:hover {
+		cursor: pointer;
+	}
 
 	&.action {
 		background: #fff;
@@ -104,9 +109,10 @@ body {
 }
 
 .intro {
-	height: 100vh;
+	height: 80vh;
 	background: image-url("bg.jpg") no-repeat center center $base-color;
 	background-size: cover;
+	background-attachment: fixed;
 
 	&-subtitle {
 		text-transform: uppercase;
@@ -126,6 +132,42 @@ body {
 		top: 0;
 		height: 100%;
 		width: 100%;
+	}
+}
+
+.votes {
+	margin: 2rem 0;
+
+	.vote {
+		color: #fff;
+		background: rgba(255,255,255,0.2);
+		padding: 1rem;
+		border-radius: 100rem;
+		max-width: 300px;
+		display: block;
+		text-align: center;
+		text-shadow: 0 0.1rem 0.1rem rgba(0,0,0,0.2);
+	}
+}
+
+.time-line {
+	padding: 1.5rem 0;
+	background: #fff;
+	box-shadow: 0 0.1rem 0.1rem rgba(0,0,0,0.1);;
+
+	.vote {
+		display: inline-block;
+		margin: 0 0.5rem;
+
+		h3 {
+			font-size: 1rem;
+			font-weight: 400;
+			color: rgba(0,0,0,0.5);
+		}
+
+		span {
+			color: rgba($base-color, 0.6);
+		}
 	}
 }
 
@@ -153,7 +195,7 @@ body {
 }
 
 .poll-item {
-	background: #fff;
+	background: image-url("charts.png") no-repeat right bottom #fff;
 	padding: 2rem 1rem 3.5rem 1rem;
 	border-radius: 0.4rem;
 	box-shadow: 0 0.4rem 0.4rem rgba(0,0,0,0.2);
@@ -304,8 +346,8 @@ body {
 
 
 .page-hero {
-	background: $base-color;
-	padding: 6rem 0 2rem 0;
+	background: image-url("hands.png") repeat-x bottom center $base-color;
+	padding: 10rem 0 4rem 0;
 	text-align: center;
 
 	.material-icons {
@@ -405,17 +447,21 @@ body {
 	padding: 1rem 0;
 	border-radius: 0.2rem;
 	box-shadow: 0 0.2rem 0.5rem rgba(0,0,0,0.1);
-	text-align: center;
 
-	.material-icons {
-		color: rgba($base-color, 0.5);
+	h3 {
+		.material-icons {
+			color: rgba(43, 141, 245, 0.5);
+			font-size: 1.2rem;
+			transform: translateY(20%);
+		}
 	}
 
 	p {
-		margin: 1em 0;
 		max-width: 960px;
 		margin: 0.5rem auto;
-		color: rgba(#000,0.8);
+		color: rgba(77, 95, 115, 0.83);
+		font-size: 1.3em;
+		line-height: 1.4em;
 	}
 
 	.data-block ul li {
@@ -423,11 +469,22 @@ body {
 	}
 }
 
+.column {
+	width: 48%;
+}
+
+.data-blocks {
+	border-top: 1px solid rgba(204, 204, 204, 0.29);
+	margin-top: 2rem;
+}
+
 .data-block {
 	text-align: center;
 	padding: 1rem;
 	display: inline-block;
 	min-width: 100px;
+	max-width: 24%;
+	vertical-align: top;
 
 	.number {
 		font-size: 2.6rem;
@@ -437,55 +494,82 @@ body {
 
 	h4 {
 		color: rgba(0,0,0,0.5);
+		font-size: 0.8rem;
 	}
 }
 
 .vote-options {
 	text-align: center;
+	position: relative;
 
 	h3 {
 		margin: 1rem 0;
-		color: rgba(#000,0.4);
+		color: rgba(#000,0.6);
+	}
+
+	p {
+		color: rgba(0,0,0,0.7);
+    	margin: 1rem 0;
 	}
 }
 
 .charts {
 	padding: 1rem 0;
 	background: #fff;
-	box-shadow: 0 -0.2rem 0.4rem rgba(#000,0.1);
 }
 
 .option-vote {
 	background: #fff;
-	padding: 1rem;
-	text-align: center;
-	border-radius: 0.4rem;
-	box-shadow: 0 0.2rem 0.6rem rgba(0,0,0,0.1);
-	display: inline-block;
-	width: 32%;
-	margin: 0.5%;
-	max-width: 400px;
-	position: relative;
-	overflow: hidden;
-	transition: all 0.3s ease;
-	cursor: pointer;
+    text-align: center;
+    border-radius: 0.2rem;
+    box-shadow: 0 0.2rem 0.6rem rgba(0, 0, 0, 0.1);
+    display: none;
+    width: 60%;
+    margin: 2rem auto;
+    max-width: 680px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
 
-	&:hover {
-		box-shadow: 0 0.4rem 0.6rem rgba(0,0,0,0.2);
-	}
+    .button {
+		margin: 1rem 0;
+    }
 
-	a {
-		color: #000;
+    &-header {
+    	background: $base-color;
+    	padding: 1rem;
+    }
+
+    .pagination {
+		font-size: 0.8rem;
+		color: rgba(255,255,255,0.4);
+		text-transform: uppercase;
+		font-weight: 600;
+		letter-spacing: 2px;
+    }
+
+	.name {
+		color: #ffffff;
 		font-weight: 600;
 		display: block;
 		margin-bottom: 0.5em;
+		font-weight: 400;
+		font-size: 1.4rem;
+	}
+
+	p {
+		color: #7991ab;
+		font-weight: 300;
+		line-height: 1.8rem;
+		font-size: 1.4rem;
 	}
 
 	.bullet {
 		padding: 0.5rem 1rem;
 		border-radius: 0.2rem;
-		background: rgba($base-color,0.1);
-		color: rgba($base-color,0.6);
+		background: rgba(0, 0, 0, 0.45);
+		color: rgba(43, 141, 245, 0.6);
 		font-weight: 600;
 		border-bottom: 1rem;
 		display: inline-block;
@@ -493,6 +577,27 @@ body {
 		margin-bottom: 0.5rem;
 	}
 
+}
+
+.nav {
+	padding: 20px;
+	position: absolute;
+	background: #fff;
+	top: 50%;
+	transform: translateY(-50%);
+
+	&:hover {
+		cursor: pointer;
+		background: $base-color;
+	}
+}
+
+#prev {
+	left: -64px;
+}
+
+#next {
+	right: -64px;
 }
 
 @media (max-width: 700px) {
