@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Sufragia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
@@ -11,7 +12,9 @@
 <body>
   <header class="main-header animated fadeIn">
     <div class="container center">
-      <%= image_tag 'logo.png', class: "logo" %>
+      <%= link_to root_path, class: "logo" do %>
+        <%= image_tag 'logo.png' %>
+      <% end %>
       <nav class="main-nav">
         <%- if user_signed_in? %>
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
