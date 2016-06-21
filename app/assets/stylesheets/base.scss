@@ -105,7 +105,7 @@ body {
 
 .intro {
 	height: 100vh;
-	background: url(bg.jpg) no-repeat center center $base-color;
+	background: image-url("bg.jpg") no-repeat center center $base-color;
 	background-size: cover;
 
 	&-subtitle {
@@ -164,9 +164,12 @@ body {
 	position: relative;
 	overflow: hidden;
 	transition: all 0.3s ease;
+	vertical-align: top;
+	min-height: 200px;
 
 	&:hover {
 		box-shadow: 0 0.8rem 0.4rem rgba(0,0,0,0.2);
+		cursor: pointer;
 	}
 
 	&-category {
@@ -218,7 +221,8 @@ body {
 
 .full-page {
 	height: 100vh;
-	background: url(full.jpg) no-repeat center center $base-color;
+	background: image-url("full.jpg") no-repeat center center $base-color;
+
 	background-size: cover;
 
 	.material-icons {
