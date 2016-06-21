@@ -21,7 +21,7 @@
 			<h2 class="poll-item-title"><%=campaign.name%></h2>
 			<span class="poll-item-tag"><i class="material-icons">person</i><%=campaign.votes.count%> votantes</span>
 			<div class="poll-item-actions">
-				<%= link_to "Votar", @campaign, class: "action" %>
+				<%= link_to "Votar", campaign, class: "action" %>
 			</div>
 		</article>
 		<% end %>

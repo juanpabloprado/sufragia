@@ -6,6 +6,7 @@
 	<div class="container">
 		  <i class="material-icons">event_note</i>
 		<p><%= @campaign.description %> </p>
+		<p><%= @campaign.expiration_date.strftime("%B %d, %Y") %> </p>
 	</div>
 	<div class="data-blocks">
 		<% @campaign.options.each do |option| %>
@@ -20,6 +21,9 @@
 	<div class="container vote-options">
 		<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
 		  <h3>Ya has votado amigo!</h3>
+		<% elsif @campaign.expired? %>
+			 <h3>La campana ha expirado!</h3>
+
 		<% else %>
 			<h3>Opciones</h3>
 		    <% @campaign.options.each_with_index do |option, index| %>

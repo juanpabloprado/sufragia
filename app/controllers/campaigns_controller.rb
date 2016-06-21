@@ -26,6 +26,7 @@ class CampaignsController < ApplicationController
       params.require(:campaign).permit(
         :name,
         :description,
+        :expiration_date,
         :segments => [:zone],
         options_attributes: [:id, :option, :description, :_destroy])
     end

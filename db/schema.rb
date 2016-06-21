@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621034651) do
+ActiveRecord::Schema.define(version: 20160621045341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,10 +20,11 @@ ActiveRecord::Schema.define(version: 20160621034651) do
     t.string   "name"
     t.string   "category"
     t.text     "description"
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
     t.integer  "user_id"
-    t.jsonb    "segments",    default: {}
+    t.jsonb    "segments",        default: {}
+    t.datetime "expiration_date"
   end
 
   add_index "campaigns", ["user_id"], name: "index_campaigns_on_user_id", using: :btree
