@@ -6,8 +6,7 @@ ADD . /usr/src/app
 WORKDIR /usr/src/app
 
 # Clean up un-needed files:
-RUN mv config/database.yml.url-example config/database.yml \
-  && rm -rf .dockerignore Dockerfile tmp/cache/* tmp/pids/* log/* dev-entrypoint.sh docker-compose.yml *.env .env examples
+RUN rm -rf .dockerignore Dockerfile tmp/cache/* tmp/pids/* log/* dev-entrypoint.sh docker-compose.yml *.env .env examples
 
 # Run bundle install
 RUN bundle install --deployment --without development test
