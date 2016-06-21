@@ -1,6 +1,6 @@
 class CampaignsController < ApplicationController
-  #before_action :authenticate_user!
-  
+  before_action :authenticate_user!
+
   def create
     @campaign = Campaign.new(campaign_params)
 
@@ -9,25 +9,23 @@ class CampaignsController < ApplicationController
     else
       render 'new'
     end
-    
   end
 
-  def show 
-
+  def show
+    @campaign = Campaign.find(params[:id])
   end
 
   def new
     @campaign = Campaign.new
   end
 
-  private 
+  private
 
-  def campaign_params
+    def campaign_params
       params.require(:campaign).permit(
         :name,
         :description,
         :category,
-        options_attributes: [:id, :option, :description,:_destroy]
-      )
+        options_attributes: [:id, :option, :description, :_destroy])
     end
 end
