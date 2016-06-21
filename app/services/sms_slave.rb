@@ -9,7 +9,14 @@ class SmsSlave
   end
 
   def self.campaign_vote_request(campaign, user)
-  	TEXT_MAGIC_API.send "#{campaign.id} - Pregunta: ", user.phone_with_country_code 
+    options = campaign.options.map.with_index {|o, index| "#{index + 1}=#{o.option}" }.join(" ")
+  	TEXT_MAGIC_API.send %Q{
+    #{campaign.id} - Pregunta: #{campaign.name}
+
+      #{options}
+
+      Responde con alguno de los valores: /votar opcion
+}, user.phone_with_country_code
   end
 
 end

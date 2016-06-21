@@ -3,6 +3,8 @@ class Campaign < ActiveRecord::Base
 	belongs_to :user
 	has_many :votes, through: :options
 
+  after_create :notify_users!
+
   default_scope -> { order(:created_at => :desc) }
 
 	accepts_nested_attributes_for :options
@@ -22,5 +24,14 @@ class Campaign < ActiveRecord::Base
 	def expired?
 		Date::today() > expiration_date
 	end
+
+  private
+
+  def notify_users!
+    User.all.each do |u|
+      u.update_attribute(:last_campaign_id, self.id)
+      SmsSlave.campaign_vote_request(self, u)
+    end
+  end
 
 end
