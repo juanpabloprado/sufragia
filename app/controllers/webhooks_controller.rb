@@ -24,7 +24,7 @@ class WebhooksController < ApplicationController
         SmsSlave.successful_vote(user)
       end
     elsif sms_reader.is_user_creation_hook?
-      user = User.create(phone_number: phone_number, passoword: sms_reader.pin_code_assignment)
+      user = User.create(phone_number: phone_number, password: sms_reader.pin_code_assignment)
       SmsSlave.message_to_new_user(user)
     end
   end
