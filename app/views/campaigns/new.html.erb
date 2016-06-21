@@ -19,6 +19,12 @@
           <%= f.text_area :description %>
         </div>
 
+         <div class="field">
+          <%= f.label :expiration_date, "Fecha de expiración" %>
+          <p>Ingresa la fecha de expiración</p>
+          <%= f.date_field :expiration_date %>
+        </div>
+
         <h3>Options</h3>
         <%= f.fields_for :options do |option_form| %>
           <div class="option-item">
