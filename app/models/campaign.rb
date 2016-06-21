@@ -19,4 +19,8 @@ class Campaign < ActiveRecord::Base
 		User.where(properties: segments.to_json).pluck(:phone_number)
 	end
 
+	def expired?
+		Date::today() > expiration_date
+	end
+
 end

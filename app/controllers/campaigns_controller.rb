@@ -17,7 +17,6 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new
-    2.times { @campaign.options.build }
   end
 
   private
@@ -26,6 +25,7 @@ class CampaignsController < ApplicationController
       params.require(:campaign).permit(
         :name,
         :description,
+        :expiration_date,
         :segments => [:zone],
         options_attributes: [:id, :option, :description, :_destroy])
     end

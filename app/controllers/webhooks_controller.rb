@@ -12,7 +12,8 @@ class WebhooksController < ApplicationController
     head :ok
     sms_reader = SmsReader.new(params) 
 
-    user = User.find_by(phone_number: sms_reader.from[2..-1])
+    phone_number = sms_reader.from[2..-1]
+    user = User.find_by(phone_number: phone_number)
 
     if user.present?
       if sms_reader.is_vote_hook? 
@@ -22,6 +23,9 @@ class WebhooksController < ApplicationController
       	user.update_attribute(:last_campaign_id, nil)
         SmsSlave.successful_vote(user)
       end
+    elsif sms_reader.is_user_creation_hook?
+      user = User.create(phone_number: phone_number, passoword: sms_reader.pin_code_assignment)
+      SmsSlave.message_to_new_user(user)
     end
   end
 end
