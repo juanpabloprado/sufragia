@@ -1,11 +1,64 @@
-<h1><%= @campaign.name %></h1>
+<header class="page-hero">
+  <h2 class="page-hero-title"><%= @campaign.name %></h2>
+  <p class="page-hero-desc">Crea una nueva votación y elige los ciudadanos a votar.</p>
+</header>
+<section class="description">
+	<div class="container">
+		  <i class="material-icons">event_note</i>
+		<p><%= @campaign.description %> </p>
+	</div>
+	<div class="data-blocks">
+		<% @campaign.options.each do |option| %>
+			<div class="data-block">
+				<span class="number"><%= option.votes.count %></span>
+				<h4><%= option.option %></h4>
+			</div>
+		<% end %>
+	</div>
+</section>
+<section>
+	<div class="container vote-options">
+		<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
+		  <h3>Ya has votado amigo!</h3>
+		<% else %>
+			<h3>Opciones</h3>
+		    <% @campaign.options.each_with_index do |option, index| %>
+		      <article class="option-vote">
+		      	<span class="bullet"><%= letter(index) %></span>
+		      	<%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %>
+		      	<%= option.description %>
+		      </article>
+		    <% end %>
+		<% end %>
+	</div>
+</section>
+<section class="charts center">
+	<div id="donut_single">
+</section>
+<script type="text/javascript">
+	  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
 
-<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
-  <h3>Ya has votado amigo!</h3>
-<% else %>
-  <ul>
-    <% @campaign.options.each do |option| %>
-      <li><%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %></li>
-    <% end %>
-  </ul>
-<% end %>
+        var data = new google.visualization.DataTable();
+	      data.addColumn('string', 'Option');
+	      data.addColumn('number', 'Votes');
+	      data.addRows([
+	      	 <% @campaign.options.each_with_index do |option, index| %>
+	      	 	  ['<%=option.option%>', <%=option.votes.count%>],
+	      	 <% end %>
+	      ]);
+
+        var options = {
+          pieHole: 0.6,
+          backgroundColor: null,
+          chartArea: {width:'100%',height:'100%'},
+          pieSliceTextStyle: {
+            color: 'black',
+          }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+      }
+</script>
