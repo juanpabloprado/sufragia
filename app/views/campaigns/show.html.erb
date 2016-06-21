@@ -1,11 +1,55 @@
 <h1><%= @campaign.name %></h1>
 
-<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
-  <h3>Ya has votado amigo!</h3>
-<% else %>
-  <ul>
-    <% @campaign.options.each do |option| %>
-      <li><%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %></li>
-    <% end %>
-  </ul>
-<% end %>
+<section>
+	<h3> Pregunta: <%= @campaign.name %> </h3>
+	<h3> Descripcion: <%= @campaign.description %> </h3>
+<hr>
+	<div id="donutchart" style="width: 900px; height: 500px;"></div>
+	<ul>
+	<% @campaign.options.each do |option| %>
+		<li> <%= "#{option.option}: #{option.votes.count} Votes" %></li>
+	<% end %>
+	</ul>
+</section>
+<hr>
+
+<section>
+
+	<h5>Votemos!</h5>
+
+	<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
+	  <h3>Ya has votado amigo!</h3>
+	<% else %>
+	  <ul>
+	    <% @campaign.options.each do |option| %>
+	      <li><%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %></li>
+	    <% end %>
+	  </ul>
+	<% end %>
+
+</section>
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = google.visualization.arrayToDataTable([
+          ['Effort', 'Amount given'],
+          ['My all',     100],
+        ]);
+
+        var options = {
+          pieHole: 0.5,
+          pieSliceTextStyle: {
+            color: 'black',
+          },
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+      }
+
+
+</script>
+    
