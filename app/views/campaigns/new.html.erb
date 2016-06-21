@@ -1,0 +1,47 @@
+<h2>New Campaign</h2>
+
+<%= nested_form_for(@campaign) do |f| %>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :name, autofocus: true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :category %>
+    <%= f.text_field :category %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description%>
+  </div>
+
+  
+  <div class="field">
+    <%= f.label :segments %><br />
+    <%= f.text_field :segments %>
+  </div>
+
+  <hr>
+  <h3>Options</h3>
+  <%= f.fields_for :options do |option_form| %>
+      <div class="field">
+        <%=option_form.label :option %><br />
+        <%=option_form.text_field :option %>
+      </div>
+
+      <div class="field">
+        <%=option_form.label :description %><br />
+        <%=option_form.text_field :description %>
+      </div>
+
+      <%= option_form.link_to_remove "Remove this option" %>
+    
+  <% end %>
+  <p><%= f.link_to_add "Add an option", :options %></p>
+  
+
+  <div class="actions">
+    <%= f.submit "Create Campaign"%>
+  </div>
+<% end %>
