@@ -1,20 +1,25 @@
 <header class="page-hero">
   <h2 class="page-hero-title"><%= @campaign.name %></h2>
-  <p class="page-hero-desc">Crea una nueva votación y elige los ciudadanos a votar.</p>
+  <p class="page-hero-desc">Termina el <%=  @campaign.expiration_date.strftime("%B %d, %Y") %> </p>
 </header>
 <section class="description">
-	<div class="container">
-		  <i class="material-icons">event_note</i>
-		<p><%= @campaign.description %> </p>
-		<p>Expiration date: <%=  @campaign.expiration_date.strftime("%B %d, %Y") %> </p>
-	</div>
-	<div class="data-blocks">
-		<% @campaign.options.each do |option| %>
-			<div class="data-block">
-        <span class="number" id="option-<%= option.id %>"><%= option.votes.count %></span>
-				<h4><%= option.option %></h4>
+	<div class="container center">
+		<div class="column">
+			<h3><i class="material-icons">event_note</i> Descripción</h3>
+			<p><%= @campaign.description %> </p>
+			<div class="data-blocks">
+				<% @campaign.options.each do |option| %>
+					<div class="data-block">
+						<span class="number" id="option-<%= option.id %>"><%= option.votes.count %></span>
+						<h4><%= option.option %></h4>
+					</div>
+				<% end %>
+
 			</div>
-		<% end %>
+		</div>
+		<div class="charts center column">
+			<div id="donut_single">
+		</div>
 	</div>
 </section>
 <section>
@@ -25,18 +30,25 @@
 			 <h3>La campana ha expirado!</h3>
 		<% else %>
 			<h3>Opciones</h3>
-		    <% @campaign.options.each_with_index do |option, index| %>
-		      <article class="option-vote">
-		      	<span class="bullet"><%= letter(index) %></span>
-		      	<%= link_to option.option, campaign_votes_path(campaign_id: @campaign.id, option_id: option.id), method: :post, remote: true %>
-		      	<%= option.description %>
-		      </article>
-		    <% end %>
+			<p>Elige una opción de las listadas a continuación, una vez hecho el voto no podrás volver a votar.</p>
+			<div class="options-vote">
+				<div id="prev" class="nav"><i class="material-icons">chevron_left</i></div>
+			    <% @campaign.options.each_with_index do |option, index| %>
+			      <article class="option-vote" id="slide-<%= index %>">
+			      	<div class="option-vote-header">
+			      		<span class="bullet"><%= letter(index) %></span>
+			      		<h3 class="name"><%= option.option %></h3>
+			      	</div>
+			      	<div class="container">
+			      		<p><%= option.description %></p>
+			      		<%= link_to "Votar por esta opción", campaign_votes_path(campaign_id: @campaign.id, option_id: option.id), method: :post, remote: true, class: "button action inverse" %>
+			      	</div>
+			      </article>
+			    <% end %>
+			    <div id="next" class="nav"><i class="material-icons">chevron_right</i></div>
+			 </div>
 		<% end %>
 	</div>
-</section>
-<section class="charts center">
-	<div id="donut_single">
 </section>
 <script type="text/javascript">
 	  google.charts.load('current', {'packages':['corechart']});

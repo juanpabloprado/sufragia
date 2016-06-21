@@ -29,14 +29,27 @@
     </div>
   </header>
   <%= yield %>
-
-  
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/scrollReveal.js/3.1.4/scrollreveal.min.js"></script>
   <script type="text/javascript">
     window.sr = ScrollReveal();
     sr.reveal('.poll-item', { duration: 600 }, 50);
   </script>
+  <script type="text/javascript">
+    $('.option-vote').first().show();
+    var slide = 1;
+    $('#next').click(function(event){
+      event.preventDefault();
+      $('.option-vote').hide();
+      
+      $('#slide-' + slide).show();
+      slide++;
 
-  
+      if (slide === $('.option-vote').length) {
+        slide = 0;
+      }
+      
+      $('html, body').animate({scrollTop: $(".option-vote").offset().top}, 600);
+    });
+  </script>
 </body>
 </html>

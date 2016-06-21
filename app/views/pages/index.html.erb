@@ -1,17 +1,38 @@
 <section class="intro center vertical">
-	<h4 class="intro-subtitle animated fadeInDown">Votación decentralizada</h4>
-	<h2 class="intro-title animated fadeInUp">Sistema nacional de votación decentralizada</h2>
+	<h4 class="intro-subtitle animated fadeInDown">Sistema de votación nacional</h4>
+	<h2 class="intro-title animated fadeInUp">Participación ciudadana donde sea, cuando sea.</h2>
 	<div class="button-group">
 		<% if user_signed_in? %>
-			<%= link_to "Crear Campaña", new_campaign_path, class: "button primary action animated fadeIn" %>
+			<%= link_to "Crear Votación", new_campaign_path, class: "button primary action animated fadeIn" %>
 		<%else%>
 			<%= link_to "Crear Perfil", new_user_registration_path, class: "button primary action animated fadeIn" %>
 		<%end%>
 	</div>
+	<div class="votes">
+		<span class="vote">Un ciudadano acaba de votar: <b>Monterrey</b> en <b>¿Qué presidente serías?</b></span>
+	</div>
 </section>
-<section class="big-search center">
-	<i class="material-icons">search</i>
-	<input type="search" placeholder="Buscar...">
+<section class="time-line center">
+	<div class="vote">
+		<h4>Peña Nieto</h4>
+		<h3>Elección presidente de México</h3>
+		<span>Hace 2 Minutos</span>
+	</div>
+	<div class="vote">
+		<h4>Peña Nieto</h4>
+		<h3>Elección presidente de México</h3>
+		<span>Hace 2 Minutos</span>
+	</div>
+	<div class="vote">
+		<h4>Peña Nieto</h4>
+		<h3>Elección presidente de México</h3>
+		<span>Hace 2 Minutos</span>
+	</div>
+	<div class="vote">
+		<h4>Peña Nieto</h4>
+		<h3>Elección presidente de México</h3>
+		<span>Hace 2 Minutos</span>
+	</div>
 </section>
 <section class="polls">
 	<div class="container">
