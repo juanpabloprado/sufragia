@@ -1,0 +1,31 @@
+<% broadcast "/campaigns/new" do %>
+  <% campaign =  Campaign.find(params[:campaign_id]) %>
+  <% campaign.options.each do |option| %>
+    $("#option-<%= option.id %>").text('<%= option.votes.count %>');
+  <% end %>
+      $('.vote-options').fadeOut();
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+
+        var data = new google.visualization.DataTable();
+	      data.addColumn('string', 'Option');
+	      data.addColumn('number', 'Votes');
+	      data.addRows([
+	      	 <% campaign.options.each_with_index do |option, index| %>
+	      	 	  ['<%=option.option%>', <%=option.votes.count%>],
+	      	 <% end %>
+	      ]);
+
+        var options = {
+          pieHole: 0.6,
+          backgroundColor: null,
+          chartArea: {width:'100%',height:'100%'},
+          pieSliceTextStyle: {
+            color: 'black',
+          }
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('donut_single'));
+        chart.draw(data, options);
+      }
+<% end %>

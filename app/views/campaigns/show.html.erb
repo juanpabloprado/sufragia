@@ -11,7 +11,7 @@
 	<div class="data-blocks">
 		<% @campaign.options.each do |option| %>
 			<div class="data-block">
-				<span class="number"><%= option.votes.count %></span>
+        <span class="number" id="option-<%= option.id %>"><%= option.votes.count %></span>
 				<h4><%= option.option %></h4>
 			</div>
 		<% end %>
@@ -23,13 +23,12 @@
 		  <h3>Ya has votado amigo!</h3>
 		<% elsif @campaign.expired? %>
 			 <h3>La campana ha expirado!</h3>
-
 		<% else %>
 			<h3>Opciones</h3>
 		    <% @campaign.options.each_with_index do |option, index| %>
 		      <article class="option-vote">
 		      	<span class="bullet"><%= letter(index) %></span>
-		      	<%= link_to option.option, campaign_votes_path(campaign_id: @campaign.id, option_id: option.id), method: :post %>
+		      	<%= link_to option.option, campaign_votes_path(campaign_id: @campaign.id, option_id: option.id), method: :post, remote: true %>
 		      	<%= option.description %>
 		      </article>
 		    <% end %>

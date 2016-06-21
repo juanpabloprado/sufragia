@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  faye = new Faye.Client('http://sufragia.cloudapp.net:9292/faye')
+  faye.subscribe '/campaigns/new', (data) ->
+    eval(data)
+

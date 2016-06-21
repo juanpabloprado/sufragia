@@ -15,7 +15,7 @@ services:
       - 5432:5432
     environment:
       POSTGRES_PASSWORD: "H4ch4Th0n!"
-  web:
+  web: &app
     image: ruby:2.2.5
     command: rails server -b 0.0.0.0 -p 3000 -P /tmp/rails.pid
     working_dir: /usr/src/app
@@ -37,4 +37,20 @@ services:
       RACK_ENV: "development"
       TEXT_MAGIC_USERNAME: "edolopez"
       TEXT_MAGIC_PASSWORD: "fTfrCKBlSN"
-
+      FAYE_SERVER_URL: "http://192.168.99.100:9292/faye"
+  faye:
+    image: ruby:2.2.5
+    command: rackup faye.ru -s thin -E production -o 0.0.0.0
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - gems:/usr/local/bundle
+    # Keep the stdin open, so we can attach to our app container's process
+    # and do things such as byebug, etc:
+    stdin_open: true
+    # Enable sending signals (CTRL+C, CTRL+P + CTRL+Q) into the container:
+    tty: true
+    links:
+      - db
+    ports:
+      - 9292:9292
