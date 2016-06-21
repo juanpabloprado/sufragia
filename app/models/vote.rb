@@ -14,7 +14,7 @@ class Vote < ActiveRecord::Base
 
   def vote_unique_per_campaign_per_option
     campaign = option.campaign
-    if self.class.where(user_id: user_id, option: campaign.optione_ids).exists?
+    if self.class.where(user_id: user_id, option: campaign.option_ids).exists?
       errors.add :vote, 'ya votaste'
     end
   end
