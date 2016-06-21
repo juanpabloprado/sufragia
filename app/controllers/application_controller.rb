@@ -25,6 +25,10 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource_or_scope)
-    stored_location_for(resource_or_scope) || confirm_user_path(resource_or_scope)
+    if resource_or_scope.confirmed?
+      root_path
+    else
+      confirm_user_path(resource_or_scope)
+    end
   end
 end
