@@ -19,6 +19,7 @@
       <% end %>
       <nav class="main-nav">
         <%- if user_signed_in? %>
+          <%= link_to "Crear Campaña", new_campaign_path %>
           <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
         <% else %>
           <%= link_to "Alta de Usuario", new_user_registration_path %>
