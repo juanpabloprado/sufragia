@@ -1,1 +1,11 @@
 <h1><%= @campaign.name %></h1>
+
+<% if user_signed_in? && current_user.already_voted_on_campaign?(@campaign) %>
+  <h3>Ya has votado amigo!</h3>
+<% else %>
+  <ul>
+    <% @campaign.options.each do |option| %>
+      <li><%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %></li>
+    <% end %>
+  </ul>
+<% end %>
