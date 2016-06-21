@@ -14,6 +14,19 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'pages#index'
+
+  namespace :api, path: '/api' do
+    api_version(:module => "V1", :header => {:name => "Accept",
+                                             :value => "application/vnd.sufragia.com+json; version=1"},
+                                             :defaults => {:format => :json}, :default => true) do
+
+      post 'sessions' => "sessions#create"
+      delete 'sessions' => "sessions#destroy"
+      resources :campaigns, only: [:show, :create] do
+       resources :votes, only: [:create]
+      end
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  tollify
   include PhoneConfirmable
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
