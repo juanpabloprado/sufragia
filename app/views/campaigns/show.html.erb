@@ -6,7 +6,7 @@
 	<div class="container">
 		  <i class="material-icons">event_note</i>
 		<p><%= @campaign.description %> </p>
-		<p><%= @campaign.expiration_date.strftime("%B %d, %Y") %> </p>
+		<p>Expiration date: <%=  @campaign.expiration_date.strftime("%B %d, %Y") %> </p>
 	</div>
 	<div class="data-blocks">
 		<% @campaign.options.each do |option| %>
@@ -29,7 +29,7 @@
 		    <% @campaign.options.each_with_index do |option, index| %>
 		      <article class="option-vote">
 		      	<span class="bullet"><%= letter(index) %></span>
-		      	<%= link_to option.option, campaign_votes_path(@campaign, option_id: option.id), method: :post %>
+		      	<%= link_to option.option, campaign_votes_path(campaign_id: @campaign.id, option_id: option.id), method: :post %>
 		      	<%= option.description %>
 		      </article>
 		    <% end %>

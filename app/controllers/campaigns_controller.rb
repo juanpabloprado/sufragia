@@ -17,7 +17,6 @@ class CampaignsController < ApplicationController
 
   def new
     @campaign = Campaign.new
-    2.times { @campaign.options.build }
   end
 
   private
