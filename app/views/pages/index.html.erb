@@ -12,32 +12,15 @@
 </section>
 <section class="polls">
 	<div class="container">
+		<% @campaigns.each do |campaign| %>
 		<article class="poll-item">
 			<span class="poll-item-category">Tecnología</span>
-			<h2 class="poll-item-title">Ganador Hackathon BIAC Communities</h2>
-			<span class="poll-item-tag"><i class="material-icons">person</i>12 votantes</span>
+			<h2 class="poll-item-title"><%=campaign.name%></h2>
+			<span class="poll-item-tag"><i class="material-icons">person</i><%=campaign.votes.count%> votantes</span>
 			<div class="poll-item-actions">
-				<a href="#" class="link">Ver Detalles</a>
-				<a href="#" class="action">Votar</a>
+				<%= link_to "Votar", @campaign, class: "action" %>
 			</div>
 		</article>
-		<article class="poll-item">
-			<span class="poll-item-category">Tecnología</span>
-			<h2 class="poll-item-title">Ganador Hackathon BIAC Communities</h2>
-			<span class="poll-item-tag"><i class="material-icons">person</i>12 votantes</span>
-			<div class="poll-item-actions">
-				<a href="#" class="link">Ver Detalles</a>
-				<a href="#" class="action">Votar</a>
-			</div>
-		</article>
-		<article class="poll-item">
-			<span class="poll-item-category">Tecnología</span>
-			<h2 class="poll-item-title">Ganador Hackathon BIAC Communities</h2>
-			<span class="poll-item-tag"><i class="material-icons">person</i>12 votantes</span>
-			<div class="poll-item-actions">
-				<a href="#" class="link">Ver Detalles</a>
-				<a href="#" class="action">Votar</a>
-			</div>
-		</article>
+		<% end %>
 	</div>
 </section>

@@ -1,6 +1,7 @@
 class Campaign < ActiveRecord::Base
 	has_many :options
 	belongs_to :user
+	has_many :votes, through: :options
 
   default_scope -> { order(:created_at => :desc) }
 
@@ -17,4 +18,5 @@ class Campaign < ActiveRecord::Base
 	def target_phone_numbers
 		User.where(properties: segments.to_json).pluck(:phone_number)
 	end
+
 end
