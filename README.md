@@ -1,5 +1,9 @@
 == README
 
+<a href="https://heroku.com/deploy?template=https://github.com/IcaliaLabs/sufragia">
+  <img src="https://www.herokucdn.com/deploy/button.svg" alt="Deploy">
+</a>
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 

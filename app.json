@@ -1,0 +1,7 @@
+{
+  "name": "Sufragia",
+  "description": "Sistema de votación nacional descentralizado",
+  "repository": "https://github.com/IcaliaLabs/sufragia",
+  "logo": "https://node-js-sample.herokuapp.com/node.png",
+  "keywords": ["rails", "blockchain", "ruby"]
+}
