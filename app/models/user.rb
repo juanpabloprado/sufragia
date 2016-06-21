@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :authentication_keys => [:phone_number]
 
-  has_many :votes
+  has_many :votes, dependent: :destroy
   has_many :campaigns, through: :votes
 
   enum role: [ :admin, :voter ]

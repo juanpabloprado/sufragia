@@ -15,11 +15,10 @@ class ApplicationController < ActionController::Base
     end
 
     devise_parameter_sanitizer.permit(:sign_up) do |user_params|
-      user_params.permit(:name,
+      user_params.permit(:zip_code,
                          :password,
                          :password_confirmation,
-                         :phone_number,
-                         :state)
+                         :phone_number)
     end
   end
 
