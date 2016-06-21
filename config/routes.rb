@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :campaigns, only: [:new, :create, :show] do
+    resources :votes, only: [:create]
+  end
+
   devise_for :users
 
   root 'pages#index'
