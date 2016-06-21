@@ -1,47 +1,61 @@
-<h2>New Campaign</h2>
+<header class="page-hero">
+  <i class="material-icons">note_add</i>
+  <h2 class="page-hero-title">Nueva Votación</h2>
+  <p class="page-hero-desc">Crea una nueva votación y elige los ciudadanos a votar.</p>
+</header>
+<section class="page-content">
+  <div class="container">
+    <div class="card-form center">
+      <%= nested_form_for(@campaign) do |f| %>
+        <div class="field">
+          <%= f.label :title %>
+          <p>¿Cuál es la pregunta que quieres lanzar a la población.</p>
+          <%= f.text_field :name, autofocus: true %>
+        </div>
 
-<%= nested_form_for(@campaign) do |f| %>
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :name, autofocus: true %>
+        <div class="field">
+          <%= f.label :category %>
+          <p>¿Dentro de que categoría entra tu votación?</p>
+          <%= f.text_field :category %>
+        </div>
+
+        <div class="field">
+          <%= f.label :description %>
+          <p>Describe o agrega detalles a la votación, trata de ser lo mas claro posible acerca del tema a votar.</p>
+          <%= f.text_area :description%>
+        </div>
+
+        <h3>Options</h3>
+        <%= f.fields_for :options do |option_form| %>
+          <div class="option-item">
+            <div class="field">
+              <%=option_form.label :option %>
+              <%=option_form.text_field :option %>
+            </div>
+
+            <div class="field">
+              <%=option_form.label :description %>
+              <%=option_form.text_field :description %>
+            </div>
+
+            <%= option_form.link_to_remove "Remove this option" %>
+          </div>
+        <% end %>
+
+        <div class="options center vertical">
+          <%= f.link_to_add "Agregar Opción", :options %>
+        </div>
+
+        <div class="field">
+          <%= f.label :segments %><br />
+          <%= f.text_field :segments %>
+        </div>
+        
+
+        <div class="actions center">
+          <%= f.submit "Crear Votación", class: "button action inverse" %>
+        </div>
+      <% end %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :category %>
-    <%= f.text_field :category %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description%>
-  </div>
-
-  
-  <div class="field">
-    <%= f.label :segments %><br />
-    <%= f.text_field :segments %>
-  </div>
-
-  <hr>
-  <h3>Options</h3>
-  <%= f.fields_for :options do |option_form| %>
-      <div class="field">
-        <%=option_form.label :option %><br />
-        <%=option_form.text_field :option %>
-      </div>
-
-      <div class="field">
-        <%=option_form.label :description %><br />
-        <%=option_form.text_field :description %>
-      </div>
-
-      <%= option_form.link_to_remove "Remove this option" %>
-    
-  <% end %>
-  <p><%= f.link_to_add "Add an option", :options %></p>
-  
-
-  <div class="actions">
-    <%= f.submit "Create Campaign"%>
-  </div>
-<% end %>
+</section>
