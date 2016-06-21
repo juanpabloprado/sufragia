@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
+  post '/webhooks/receive_sms' => 'webhooks#receive_sms'
+
   root 'pages#index'
 
   namespace :api, path: '/api' do
